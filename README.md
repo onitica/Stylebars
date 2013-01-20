@@ -4,7 +4,7 @@
 
 A test project I made when I was unfamiliar with Javascript and JQuery. The idea was the make dymamic bars that could be styled. By bar I mean something that represents an x of y relationship (i.e. 3 out of 5). 
 
-Currently the API is incomplete (or possibly even dead wrong). Several unfixed - mainly images are buggy.
+Open index.html to see a demo of the project. Currently an alpha version so it has not been heavily tested. 
 
 ##Browsers supported:
 
