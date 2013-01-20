@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Stylebars Demo</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="css/site.css" />
+		<link rel="stylesheet" type="text/css" href="css/stylebars.css" />
+		<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="stylebars.js"></script>
+		
+		<script type="text/javascript">
+			//Get dynamic funbar, add name and a way to get number filled
+		
+			var callbacktest = function(a, b) {
+				alert("Callback for bar named: " + a + " at position: " + b);
+			};
+			
+			var setRandomSelected = function(name) {
+				StyleBars.set_stylebar_selected(name, Math.floor($("#" + name).attr("totalNum") * Math.random()));
+			}
+			
+			//return between 5 and 15
+			var randomLength = function() {
+				return 5 + Math.floor(11 * Math.random());	
+			}
+		
+			$(document).ready(function() {
+				$("#bar1").append(StyleBars.get_stylebar("firstbar", 
+				{ total: randomLength(), 
+				  type : "circle", 
+				  selectable : true, 
+				  selection_type : "single", 
+				  callback : callbacktest, 
+				  counter : function(val) { $("#bar1counter").html(val); }
+				}));
+				setRandomSelected("firstbar");
+				$("#bar2").append(StyleBars.get_stylebar("secondbar", 
+				{ total : randomLength(), 
+				  type : "square", 
+				  selectable : true, 
+				  selection_type : "all", 
+				  size : 20,
+				  callback : callbacktest
+				}));
+				setRandomSelected("secondbar");
+				$("#bar3").append(StyleBars.get_stylebar("thirdbar", 
+				{ total : randomLength(), 
+				  type : "image", 
+				  selectable : true, 
+				  selection_type : "all", 
+				  size : 30,
+				  bar_margin : 20,
+				  callback : callbacktest,
+				  counter : function(val) { $("#bar3counter").html(val); } 
+				}));
+				setRandomSelected("thirdbar");
+				StyleBars.set_image_paths("thirdbar", "images/emptystylebar.gif", "images/fullstylebar.png");
+				$("#bar4").append(StyleBars.get_stylebar("fourthbar", 
+				{ total : randomLength(), 
+			      type : "image",
+			      image_empty_path : "images/emptystylebar.gif",
+				  image_full_path : "images/fullstylebar.png" }));
+				setRandomSelected("fourthbar");
+				$("#bar5").append(StyleBars.get_stylebar("fifthbar", 
+				{ total : randomLength(), 
+				  bar_margin : 2,
+			      type : "circle" }));
+				setRandomSelected("fifthbar");
+			});
+		</script>
+	</head>
+	<body>
+		<div id="textdiv" class="bar-holder">Some demo bars are below (Click the dynamic ones!):</div>
+		<div id="bar1text" class="bar-holder">Dynamic circle bar - one element selected:
+		<div>Counter: <span id="bar1counter">0</span></div>	
+		</div>
+		<div id="bar1" class="bar-holder" ></div>
+		<div id="bar2text" class="bar-holder">Dynamic square bar - all selected:</div>
+		<div id="bar2" class="bar-holder"></div>
+		<div id="bar3text" class="bar-holder">Dynamic image bar - all selected:
+		<div>Counter: <span id="bar3counter">0</span></div>	
+		</div>
+		<div id="bar3" class="bar-holder"></div>
+		<div id="bar4text" class="bar-holder">Static image bar -  all selected:</div>
+		<div id="bar4" class="bar-holder"></div>
+		<div id="bar5text" class="bar-holder">Static circle bar - all selected:</div>
+		<div id="bar5" class="bar-holder"></div>
+	</body>
+</html>

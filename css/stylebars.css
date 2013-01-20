@@ -1,0 +1,89 @@
+.barTitle {
+  margin-bottom: 10px;
+}
+
+.barTitle p {
+  margin-bottom: 5px;
+}
+
+.bar-holder {
+	margin-left: 30px;
+	margin-top: 20px;
+}
+
+.bar {
+	display: inline-block;
+}
+
+.block {
+  display: inline-block;
+  width: 180px;
+  
+  margin-bottom: 32px;
+}
+
+.full-square {
+  width: 15px;
+  height: 15px;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  
+  background-color: black;
+  display: inline-block;
+}
+
+.empty-square {
+  width: 15px;
+  height: 15px;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  display: inline-block;
+}
+
+.full-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  -khtml-border-radius:50%;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  
+  background-color: black;
+  display: inline-block;
+}
+
+.empty-circle {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  -moz-border-radius:50%;
+  -webkit-border-radius:50%;
+  -khtml-border-radius:50%;
+  
+  border-style: solid;
+  border-width: 2px;
+  border-color: black;
+  display: inline-block;
+}
+
+.full-image {
+  width: 15px;
+  height: 15px;
+  
+  display: inline-block;
+}
+
+.empty-image {
+  width: 15px;
+  height: 15px;
+  
+  display: inline-block;
+}
