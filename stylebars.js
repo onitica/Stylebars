@@ -67,7 +67,11 @@ var StyleBars = (function() {
 		//generate div
 		var divArray = new Array(args.total);
 		for(var i = 0; i < args.total; i++) {
-			divArray[i] = $(document.createElement('div'));
+			if(args.type === "image") {
+				divArray[i] = $(document.createElement('img'));
+			} else {
+				divArray[i] = $(document.createElement('div'));
+			}
 			divArray[i].attr("class", empty_strings(args.type));
 			divArray[i].attr("id", name + i);
 			divArray[i].attr("numID", i);
@@ -157,7 +161,7 @@ var StyleBars = (function() {
 
 	function drawSelectedElements(outerDiv, numSelected, type) {
 		//Edit each div as appropriate
-		outerDiv.children("div").each(function () {
+		outerDiv.children().each(function () {
 			if(parseInt($(this).attr("numID")) < numSelected && outerDiv.attr("selectionType") == "all") //Draw if filling up to a point
 			{
 				$(this).attr("class", full_strings(type));
@@ -165,20 +169,16 @@ var StyleBars = (function() {
 				$(this).css("width", outerDiv.attr("itemSize") + "px");
 				$(this).css("margin-left", outerDiv.attr("barItemMargin") + "px");
 				if(type === "image") {
-					$(this).html(function() {
-					return "<img src=\"" + outerDiv.attr("fullimgpath") + "\" height=\"" + outerDiv.attr("itemSize") + "px\" width=\"" + outerDiv.attr("itemSize") + "px\"></img>";
-					});
-				} else $(this).html("");
+					$(this).attr("src", outerDiv.attr("fullimgpath"));
+				} 
 			} else if($(this).attr("numID") == numSelected) { //Always fill in current
 				$(this).attr("class", full_strings(type));
 				$(this).css("height", outerDiv.attr("itemSize") + "px");
 				$(this).css("width", outerDiv.attr("itemSize") + "px");
 				$(this).css("margin-left", outerDiv.attr("barItemMargin") + "px");
 				if(type === "image") {
-					$(this).html(function() {
-					return "<img src=\"" + outerDiv.attr("fullimgpath") + "\" height=\"" + outerDiv.attr("itemSize") + "px\" width=\"" + outerDiv.attr("itemSize") + "px\"></img>";
-					});
-				} else $(this).html("");
+					$(this).attr("src", outerDiv.attr("fullimgpath"));
+				}
 			}
 			else 
 			{
@@ -187,10 +187,8 @@ var StyleBars = (function() {
 				$(this).css("width", outerDiv.attr("itemSize") + "px");
 				$(this).css("margin-left", outerDiv.attr("barItemMargin") + "px");
 				if(type === "image") {
-					$(this).html(function() {
-					return "<img src=\"" + outerDiv.attr("emptyimgpath") + "\" height=\"" + outerDiv.attr("itemSize") + "px\" width=\"" + outerDiv.attr("itemSize") + "px\"></img>";
-					});
-				} else $(this).html("");
+					$(this).attr("src", outerDiv.attr("emptyimgpath"));
+				} 
 			}
 			
 			//First element should not be spaced with a margin-left, this is for alignment
@@ -204,7 +202,9 @@ var StyleBars = (function() {
 			outerDiv.off("click");
 			outerDiv.off("mouseleave");
 		
-			outerDiv.on("click", "div", function(event) {
+			var eleType = type === "image" ? "img" : "div";
+		
+			outerDiv.on("click", eleType, function(event) {
 				var newVal = outerDiv.attr("numSelected") == $(this).attr("numID") ? -1 : $(this).attr("numID");
 				outerDiv.attr("numSelected", newVal);
 				drawSelectedElements(outerDiv, newVal, type);
